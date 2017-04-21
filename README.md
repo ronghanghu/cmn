@@ -17,8 +17,17 @@ Note: part of this repository is built upon the Faster RCNN code (https://github
 
 ## Installation
 1. Install Python 3 (Anaconda recommended: https://www.continuum.io/downloads)
-2. Install TensorFlow (v1.0.0 or higher) following the instructions [here](https://www.tensorflow.org/install/).
-3. Download this repository or clone with Git, and then `cd` into the root directory of the repository.
+2. Install TensorFlow (v1.0.0 or higher) following the instructions [here](https://www.tensorflow.org/install/). TensorFlow must be installed with GPU support.
+3. Download this repository or clone with Git, and then enter the root directory of the repository:  
+`git clone https://github.com/ronghanghu/cmn.git && cd cmn`
+4. Depending on your system, you may need to re-build the NMS lib and the ROIPooling operation:
+```
+export CMN_ROOT=$(pwd)
+cd $CMN_ROOT/util/faster_rcnn_lib/ && make
+cd $CMN_ROOT/util/roi_pooling/ && ./compile_roi_pooling.sh
+cd $CMN_ROOT
+```
+The `compile_roi_pooling.sh` uses `g++-4.8` and CUDA 8.0 to match the binary installation of TensorFlow 1.0.0 on Linux. If you installed TensorFlow from source and used different compiler or CUDA version, modify `compile_roi_pooling.sh` accordingly to match your installation.
 
 ## Download data
 1. Download the model weights of VGG-16 network (and Faster-RCNN VGG-16 network) converted from Caffe model:  
