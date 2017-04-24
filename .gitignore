@@ -21,8 +21,8 @@ downloaded_models/*
 
 *-Copy*.ipynb
 
-demo/uploads/*
-demo/viz/*
+demo*/uploads/*
+demo*/viz/*
 
 checkpoint
 

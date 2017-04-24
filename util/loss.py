@@ -8,7 +8,7 @@ def weighed_logistic_loss(scores, labels, pos_loss_mult=1.0, neg_loss_mult=1.0):
     # positive samples have label 1 while negative samples have label 0
     # Classification loss as the average of weighed per-score loss
     cls_loss = tf.reduce_mean(tf.nn.weighted_cross_entropy_with_logits(
-        scores, labels, pos_loss_mult/neg_loss_mult)) * neg_loss_mult
+        logits=scores, targets=labels, pos_weight=pos_loss_mult/neg_loss_mult)) * neg_loss_mult
 
     return cls_loss
 
