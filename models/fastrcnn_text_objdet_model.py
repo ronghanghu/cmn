@@ -25,7 +25,7 @@ def _grid_add(tensor1, tensor2, D):
 
 def text_objdet(text_seq_batch, im_batch, bbox_batch, spatial_batch,
     num_vocab, embed_dim, lstm_dim, mlp_hidden_dims, vgg_dropout, mlp_dropout,
-    grid_score):
+    grid_score, return_visfeat=True):
     """
     If grid_score is true, the output will be [N_lan x N_vis, 1] format
     and can be reshaped to [N_lan, N_vis, 1]
@@ -66,6 +66,8 @@ def text_objdet(text_seq_batch, im_batch, bbox_batch, spatial_batch,
 
         # Second layer in the classifier
         mlp_l2 = fc('mlp_l2', mlp_l1, output_dim=1)
+    if return_visfeat:
+        return mlp_l2, feat_vis  # feat_vis also includes spatial features
 
     return mlp_l2
 
