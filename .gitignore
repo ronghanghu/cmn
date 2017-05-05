@@ -21,8 +21,9 @@ downloaded_models/*
 
 *-Copy*.ipynb
 
-demo*/uploads/*
-demo*/viz/*
+*/uploads/*
+*/viz/*
+exp-txt-classifier/explanation_classifier_model/*
 
 checkpoint
 

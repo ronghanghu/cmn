@@ -16,7 +16,7 @@ print('Using GPU', args.gpu_id)
 print('Using port', args.port)
 
 import os; os.environ['CUDA_VISIBLE_DEVICES'] = args.gpu_id
-import detection_demo as demo
+import explanation_classifier_demo as demo
 import skimage.io
 from skimage.transform import resize
 
@@ -110,19 +110,11 @@ def capture_image():
 def upload_question():
     img_hash = request.form['img_id']
     question = request.form['question']
-    try:
-        num_vis = max(int(request.form['num_vis']), 1)
-    except ValueError:
-        num_vis = 1
-    try:
-        score_thresh = float(request.form['score_thresh'])
-    except ValueError:
-        score_thresh = -30.0
     if img_hash not in feature_cache:
         return jsonify({'error': 'Unknown image ID. Try uploading the image again.'})
 
     salt = str(time())
-    img_ques_hash = hashlib.md5((img_hash + question + str(num_vis) + salt).encode('utf-8')).hexdigest()
+    img_ques_hash = hashlib.md5((img_hash + question + salt).encode('utf-8')).hexdigest()
 
     start = time()
 
@@ -132,7 +124,7 @@ def upload_question():
     print('run demo start')
     path0 = os.path.join(VIZ_FOLDER, img_ques_hash + '.jpg')
     top_score_before_thresh = \
-        demo.run_demo(source_img_path, question, path0, num_vis, score_thresh)
+        demo.run_demo(source_img_path, question, path0)
     print('run demo over')
 
     json = {'answer': question,
