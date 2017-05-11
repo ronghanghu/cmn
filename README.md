@@ -35,7 +35,14 @@ The `compile_roi_pooling.sh` uses `g++-4.8` and CUDA 8.0 to match the binary ins
 2. Download the GloVe matrix for word embedding:  
 `./word_embedding/download_embed_matrix.sh`
 
-## Explanation rescoring demo
+## Explanation rescoring demo (ranking loss + different training data)
+1. Go into the explanation ranker demo folder: `cd ./exp-txt-ranker`
+2. Download the pre-trained model: `./download_demo_model.sh`
+3. Start the web demo: `python run_web_demo.py`  
+The web demo uses GPU 0 and port 8080 by default. To use a different GPU or port, set `--gpu_id` and `--port`.
+4. Go to http://localhost:8080/ in your web browser to access the demo. If you used a different port in the last step, modify the port in this URL accordingly.
+
+## Explanation rescoring demo (binary classification loss)
 1. Go into the explanation classifier demo folder: `cd ./exp-txt-classifier`
 2. Download the pre-trained model: `./download_demo_model.sh`
 3. Start the web demo: `python run_web_demo.py`  
