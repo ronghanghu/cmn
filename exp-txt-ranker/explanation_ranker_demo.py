@@ -10,7 +10,7 @@ import colorsys
 import detection_demo
 
 # Model path
-pretrained_model = './explanation_ranker_model/00000008'
+pretrained_model = '../explanation_ranker2_flipped_attributes/00000016'
 vocab_file = './data/vocab.txt'
 
 with open(vocab_file) as f:

@@ -38,7 +38,7 @@ spatial_batch = tf.placeholder(tf.float32, [None, 8])
 # Outputs
 scores = detmodel.text_objdet(text_seq_batch, im_batch, bbox_batch,
     spatial_batch, num_vocab, embed_dim, lstm_dim, mlp_hidden_dims,
-    vgg_dropout=False, mlp_dropout=False, grid_score=True)
+    vgg_dropout=False, mlp_dropout=False, grid_score=True, return_visfeat=False)
 
 # variables in this module
 module_vars = [v for v in tf.global_variables() if v not in _existing_vars]
