@@ -72,6 +72,15 @@ total = 0
 # Run test
 for n_iter in range(reader.num_batch):
     batch = reader.read_batch()
+
+    ###
+    # continue if the batch does not contain any relationship
+    # and increment n_iter so that the first few batches are not read once again in case of
+    ###
+    if batch is None:
+        n_iter = n_iter + 1
+        continue
+        
     print('\tthis batch: N_lang = %d, N_bbox = %d' %
           (batch['expr_obj1_batch'].shape[1], batch['bbox_batch'].shape[0]))
 

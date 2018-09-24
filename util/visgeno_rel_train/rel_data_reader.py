@@ -31,6 +31,7 @@ def run_prefetch(prefetch_queue, imdb, im_mean, min_size, max_size, vocab_dict,
         except IOError as err:
             # Print error and move on to next batch
             print('data reader: skipped an image.', err)
+            prefetch_queue.put(None, block=True)
 
         # Move to next batch
         n_batch_prefetch = (n_batch_prefetch + 1) % num_batch
@@ -76,7 +77,7 @@ class DataReader:
         self.prefetch_thread.start()
 
     def read_batch(self):
-        print('data reader: epoch = %d, batch = %d / %d' % (self.n_epoch, self.n_batch, self.num_batch))
+        print('data reader: epoch = %d, batch = %d / %d' % (self.n_epoch, self.n_batch + 1, self.num_batch))
 
         # Get a batch from the prefetching queue
         if self.prefetch_queue.empty():
